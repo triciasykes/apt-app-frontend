@@ -20,7 +20,7 @@ const App = () => {
 ```
 ### 2. Update our Sign Up & Login components to collect the form input data
 #### Part A - useRef
-We will be using the React hook `useRef` from react.  The useRef hook is a way to refer to elements in the user interface and access them in our code.  Let's say you have a text input in your web page, and you want to do something with the value entered by the user. With useRef, you can create a reference to that input element and use it later to get the value.
+We will be using the React hook `useRef`.  The useRef hook is a way to refer to elements in the user interface and access them in our code.  Let's say you have a text input in your web page, and you want to do something with the value entered by the user. With useRef, you can create a reference to that input element and use it later to get the value.
 
 Think about HTML and using `document.getElementById('nameInput')`. You are able to access that element's value.  This is basically what useRef does. 
 
