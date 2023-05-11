@@ -28,7 +28,7 @@ Using useRef:
 1. import it from 'react'
 2. create a variable using `useRef` and give it a meaningful name. (similar to `useNavigation`)
 3. attach the variable to the specific element you want to target by using the property `ref`.
-4. with this reference, you can access its properties/values by using `variableName.current`
+4. with this reference, you can access its properties/values by using `variableName.current`<br>
 `src/components/signup`
 ```javascript
 import { useRef } from "react"
