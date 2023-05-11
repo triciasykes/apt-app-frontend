@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Login from './components/Login'
@@ -9,8 +12,6 @@ import ApartmentShow from './pages/ApartmentShow'
 import Home from './pages/Home'
 import MyApartments from './pages/MyApartments'
 import NotFound from './pages/NotFound'
-import { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
 
 // import mockApartments from './mockApartments'
 // import mockUsers from './mockUsers'
@@ -27,6 +28,8 @@ const App = () => {
 
   const url = "http://localhost:3000"
 
+
+ 
   // authentication methods
   const login = (userInfo) => {
     fetch(`${url}/login`, {
@@ -47,7 +50,7 @@ const App = () => {
   .catch(error => console.log("login errors: ", error))
   }
 
-  const signup = async (userInfo) => {
+  const signup = (userInfo) => {
     fetch(`${url}/signup`, {
       body: JSON.stringify(userInfo),
       headers: {
@@ -74,8 +77,11 @@ const App = () => {
       },
       method: 'DELETE'
     })
+    .then(payload => {
     localStorage.removeItem("token")
     setCurrentUser(null)
+  })
+  .catch(error => console.log("log out errors: ", error))
   }
   
   
