@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Using JWT and Devise for Authenication Frontend Process
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+At this point we should be fetching the apartments from the database and no longer using mock data.  
+Now we need to look at providing authentication/authorization for a user to sign up, log in, or log out.
 
-## Available Scripts
+## Steps
 
-In the project directory, you can run:
+### 1. Set our initial state variable values
+We will set currentUser to `null` in its useState method and apartments to and empty array in it's useState method.
+`App.js`
+```javascript
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [apartments, setApartments] = useState([])
+  
+  return(
+    ...
+  )
+}
+```
+### 2. Update our Sign Up & Login components to collect the form input data
+#### Part A - useRef
+We will be using the React hook `useRef` from react.  The useRef hook is a way to refer to elements in the user interface and access them in our code.  Let's say you have a text input in your web page, and you want to do something with the value entered by the user. With useRef, you can create a reference to that input element and use it later to get the value.
 
-### `yarn start`
+Think about HTML and using `document.getElementById('nameInput')`. You are able to access that element's value.  This is basically what useRef does. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Using useRef:
+1. import it from 'react'
+2. create a variable using `useRef` and give it a meaningful name. (similar to `useNavigation`)
+3. attach the variable to the specific element you want to target by using the property `ref`.
+4. with this reference, you can access its properties/values by using `variableName.current`
+`src/components/signup`
+```javascript
+import { useRef } from "react"
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+const Signup = () => {
+  //we want to get the input values from the signup form so we'll name the variable 'formRef'
+  const formRef = useRef()
+  
+  const handleSubmit = () => {
+    console.log('sign up')
+  }
 
-### `yarn test`
+  return(
+    <div>
+     <form ref={formRef} onSubmit={handleSubmit}>
+        Email: <input type="email" name='email' placeholder="email" />
+        <br/>
+        Password: <input type="password" name='password' placeholder="password" />
+        <br/>
+        <input type='submit' value="Submit" />
+    </form>
+    <br />
+    <div>Already registered, <a href="/login">Login</a> here.</div>
+    </div>
+  )
+}
+export default Signup
+```
+#### Part B  - FormData
+Now we need to collect the input and pass the user info.  For this we will use the javascript built-in object `FormData`. It allows you to construct and manipulate HTML form data before sending it to the server.  It provides a way to create key-value pair representation of form fields and their values (like what you send in an HTTP POST request).  We can pass in our `formRef.current` in creating a new FormData, then use Object.fromEntries to get the values.  We will do all in the handleSubmit function:
+```javascript
+ const handleSubmit = (e) => {
+  //stop the default behavior of the form 
+    e.preventDefault()
+    const formData = new FormData(formRef.current)
+    const data = Object.fromEntries(formData)
+    const userInfo = {
+        "user":{ email: data.email, password: data.password }
+    }
+}
+```
+Follow the same steps for the Login component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Write the Functions for login and signup
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+...to be continued
