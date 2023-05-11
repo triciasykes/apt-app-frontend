@@ -73,9 +73,24 @@ Now we need to collect the input and pass the user info.  For this we will use t
 Follow the same steps for the Login component
 
 ### Write the Functions for login and signup
+When writing our fetch calls for authenticating/authorizing users, we need to store the token created by JWT.  `localStorage` and its methods will allow us to store, retrieve, and remove the token locally on the user's devise.  
+
+What is localStorage:
+
+`localStorage` allows us to store key-value pairs in the form of strings. The data stored remains available even after the user closes the browser or navigates away from the website.
+
+Basic methods:
+
+`localStorage.setItem(key, value)`: Used to store a value in localStorage. The key is a unique identifier for the data, and the value is the actual data you want to store. Both the key and value must be strings.
+
+`localStorage.getItem(key)`: Retrieves the value associated with a given key from localStorage. It returns null if the key does not exist.
+
+`localStorage.removeItem(key)`: Removes the item associated with the specified key from localStorage.
+
+`localStorage.clear()`: Removes all items stored in localStorage, effectively clearing the entire storage.
 
 
-...to be continued
+Note: Data must be stored as strings. If you need to store objects or arrays, you need to convert them to strings using JSON.stringify() before storing, and then parse them back to their original format using JSON.parse() when retrieving from localStorage.
 
 
  ```javascript
@@ -90,6 +105,7 @@ Follow the same steps for the Login component
       method: 'POST'
     })
     .then(response => {
+    // store the token
     localStorage.setItem("token", response.headers.get("Authorization"))
     return response.json()
   })
@@ -109,6 +125,7 @@ Follow the same steps for the Login component
       method: 'POST'
     })
     .then(response => {
+      // store the token
     localStorage.setItem("token", response.headers.get("Authorization"))
     return response.json()
   })
@@ -124,12 +141,12 @@ Follow the same steps for the Login component
     fetch(`${url}/logout`, {
       headers: {
         "Content-Type": 'application/json',
-        "Authorization": localStorage.getItem("token")
+        "Authorization": localStorage.getItem("token") //retrieve the token 
       },
       method: 'DELETE'
     })
     .then(payload => {
-    localStorage.removeItem("token")
+    localStorage.removeItem("token")  // remove the token
     setCurrentUser(null)
   })
   .catch(error => console.log("log out errors: ", error))
