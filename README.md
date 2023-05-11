@@ -58,7 +58,7 @@ const Signup = () => {
 export default Signup
 ```
 #### Part B  - FormData
-Now we need to collect the input and pass the user info.  For this we will use the javascript built-in object `FormData`. It allows you to construct and manipulate HTML form data before sending it to the server.  It provides a way to create key-value pair representation of form fields and their values (like what you send in an HTTP POST request).  We can pass in our `formRef.current` in creating a new FormData, then use Object.fromEntries to get the values.  We will do all in the handleSubmit function:
+Now we need to collect the input and pass the user info.  For this we will use the javascript built-in object `FormData`. It allows you to construct and manipulate HTML form data before sending it to the server.  It provides a way to create objects containing form fields(keys) and their values.  We can pass in our `formRef.current` in creating a new FormData, then use Object.fromEntries to get the values.  We will do all in the handleSubmit function:
 ```javascript
  const handleSubmit = (e) => {
   //stop the default behavior of the form 
