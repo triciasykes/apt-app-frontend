@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 
 const Navigation = ({current_user, logout}) => {
   const navigate = useNavigate()
-  debugger
+
   const handleClick = () => {
     logout()
     navigate("/")

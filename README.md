@@ -153,3 +153,29 @@ Note: Data must be stored as strings. If you need to store objects or arrays, yo
   }
   ```
   
+### Pass the methods and call in appropriate components
+
+```javascript
+      <Header current_user={currentUser} logout={logout} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login login={login} />} />
+        <Route path="/signup" element={<Signup signup={signup}/>} />
+```
+#### Signup and Signin
+```javascript
+const handleSubmit = (e) => {
+  ...
+  signup(userInfo)
+  navigate("/")
+  e.target.reset()  // resets the input field
+}
+```
+
+### Navigation.js
+```javascript
+const handleClick = () => {
+    logout()
+    navigate("/")
+  }
+```

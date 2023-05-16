@@ -13,8 +13,8 @@ const Signup = ({ signup }) => {
             "user":{ email: data.email, password: data.password }
         }
         signup(userInfo)
-        e.target.reset()
         navigate("/")
+        e.target.reset()
     }
     return(
         <div>
