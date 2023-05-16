@@ -26,7 +26,7 @@ const App = () => {
     readApartments()
   }, [])
 
-  const url = "http://localhost:3000"
+  const url = "apt-app-backend.onrender.com"
 
 
  
@@ -64,6 +64,7 @@ const App = () => {
     return response.json()
   })
   .then(payload => {
+    console.log(payload)
     setCurrentUser(payload)
   })
   .catch(error => console.log("login errors: ", error))
@@ -136,7 +137,7 @@ const App = () => {
    
   return(
     <>
-      <Header current_user={currentUser} logout={logout} setCurrentUser={setCurrentUser}/>
+      <Header current_user={currentUser} logout={logout} />
       <div className="wrapper">
       <Routes>
         <Route path="/" element={<Home />} />
