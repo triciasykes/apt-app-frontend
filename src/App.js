@@ -26,7 +26,7 @@ const App = () => {
     readApartments()
   }, [])
 
-  const url = "apt-app-backend.onrender.com"
+  const url = "https://apt-app-backend.onrender.com"
 
 
  
