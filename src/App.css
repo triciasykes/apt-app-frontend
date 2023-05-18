@@ -1,6 +1,7 @@
 .flex-apartments {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .index-title {
