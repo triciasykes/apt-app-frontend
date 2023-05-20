@@ -16,7 +16,7 @@ const CatFacts = ({facts, requestCatFacts, setCount}) => {
       <button onClick={requestCatFacts}></button>
     </div>
     <ul>
-      {facts?.find((fact, index) => {
+      {facts?.data.map((fact, index) => {
                   return <li key={index}>{fact}</li>
 
       })}
