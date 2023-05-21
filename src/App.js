@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+
 import CatFacts from './components/CatFacts'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -9,10 +12,8 @@ import ApartmentNew from './pages/ApartmentNew'
 import ApartmentShow from './pages/ApartmentShow'
 // import Home from './pages/Home'
 import MyApartments from './pages/MyApartments'
-import NotFound from './pages/NotFound'
-import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import Nasa from './pages/Nasa'
+import NotFound from './pages/NotFound'
 
 // import mockApartments from './mockApartments'
 // import mockUsers from './mockUsers'

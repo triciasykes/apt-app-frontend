@@ -4,10 +4,10 @@ const Nasa = () => {
 
   const [nasaData, setNasaData] = useState("")
 
-  const apiKey = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=pjTcinZkpEa63aqAk0i3hGnfuuGDrf1ZOHHsFeir"
+  const apiKey = process.env.NASA_API_KEY
 
   const nasaFetch = () => {
-    fetch(apiKey)
+    fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${apiKey}`)
     .then(response => response.json())
     .then(payload => setNasaData(payload))
     .catch(errors => console.log(errors))
