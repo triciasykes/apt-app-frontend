@@ -3,8 +3,8 @@ import { useState } from "react"
 const Nasa = () => {
 
   const [nasaData, setNasaData] = useState("")
-
-  const apiKey = process.env.NASA_API_KEY
+  
+  const apiKey = process.env.REACT_APP_NASA_API_KEY
 
   const nasaFetch = () => {
     fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${apiKey}`)
