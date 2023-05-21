@@ -10,8 +10,9 @@ import ApartmentEdit from './pages/ApartmentEdit'
 import ApartmentIndex from './pages/ApartmentIndex'
 import ApartmentNew from './pages/ApartmentNew'
 import ApartmentShow from './pages/ApartmentShow'
-import Home from './pages/Home'
+// import Home from './pages/Home'
 import MyApartments from './pages/MyApartments'
+import Nasa from './pages/Nasa'
 import NotFound from './pages/NotFound'
 
 // import mockApartments from './mockApartments'
@@ -152,7 +153,7 @@ const App = () => {
       <Header current_user={currentUser} logout={logout} />
       <div className="wrapper">
       <Routes>
-        <Route path="/" element={<CatFacts facts={catFacts} setCount={setCount} requestCatFacts={requestCatFacts}/>} />
+        <Route path="/" element={<Nasa />} />
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/signup" element={<Signup signup={signup}/>} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
