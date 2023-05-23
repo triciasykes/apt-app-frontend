@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import CatFacts from './components/CatFacts'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Login from './components/Login'
@@ -10,9 +9,8 @@ import ApartmentEdit from './pages/ApartmentEdit'
 import ApartmentIndex from './pages/ApartmentIndex'
 import ApartmentNew from './pages/ApartmentNew'
 import ApartmentShow from './pages/ApartmentShow'
-// import Home from './pages/Home'
+import Home from './pages/Home'
 import MyApartments from './pages/MyApartments'
-import Nasa from './pages/Nasa'
 import NotFound from './pages/NotFound'
 
 // import mockApartments from './mockApartments'
@@ -24,22 +22,10 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null)  // fake log in so pass in a user to simulate a user logged in.
   const [apartments, setApartments] = useState([])
 
-  const [catFacts, setCatFacts] = useState(null)
-  const [count, setCount] = useState(1)
 
-
-  
   useEffect(() => {
     readApartments()
   }, [])
-
-
-  const requestCatFacts = () => {
-    fetch(`https://meowfacts.herokuapp.com/?count=${count}`)
-    .then(response => response.json())
-    .then(payload => setCatFacts(payload)) 
-    .catch(error => console.log(error))
-  }
 
   const url = "https://apt-app-backend.onrender.com"
  
@@ -58,6 +44,7 @@ const App = () => {
     return response.json()
   })
   .then(payload => {
+    console.log(payload)
     setCurrentUser(payload)
   })
   .catch(error => console.log("login errors: ", error))
@@ -153,7 +140,7 @@ const App = () => {
       <Header current_user={currentUser} logout={logout} />
       <div className="wrapper">
       <Routes>
-        <Route path="/" element={<Nasa />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/signup" element={<Signup signup={signup}/>} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
