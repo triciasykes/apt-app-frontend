@@ -5,14 +5,14 @@ const Login = ({login}) => {
   const formRef = useRef()
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
       const formData = new FormData(formRef.current)
       const data = Object.fromEntries(formData)
       const userInfo = {
         "user":{ email: data.email, password: data.password }
       }
-      login(userInfo)
+      await login(userInfo)
       navigate("/")
       e.target.reset()
   }
