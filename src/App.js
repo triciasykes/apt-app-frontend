@@ -24,12 +24,11 @@ const App = () => {
     readApartments()
   }, [])
 
-  const url = "http://localhost:3000"
+  const url = "http://apt-app-backend.onrender.com"
   // authentication methods
   const login = (userInfo) => {
-    const url = `${url}/login`
     
-    fetch(url, {
+    fetch(`${url}/login`,{
       method: "post",
       headers: {
         'content-type': 'application/json',
