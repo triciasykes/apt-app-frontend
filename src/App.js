@@ -13,9 +13,6 @@ import Home from './pages/Home'
 import MyApartments from './pages/MyApartments'
 import NotFound from './pages/NotFound'
 
-// import mockApartments from './mockApartments'
-// import mockUsers from './mockUsers'
-
 import './App.css'
 
 const App = () => {
@@ -27,27 +24,32 @@ const App = () => {
     readApartments()
   }, [])
 
-  const url = "https://apt-app-backend.onrender.com"
- 
+  const url = "http://localhost:3000"
   // authentication methods
   const login = (userInfo) => {
-    fetch(`${url}/login`, {
-      body: JSON.stringify(userInfo),
+    const url = `${url}/login`
+    
+    fetch(url, {
+      method: "post",
       headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json'
+        'content-type': 'application/json',
+        'accept': 'application/json'
       },
-      method: 'POST'
+      body: JSON.stringify(userInfo)
     })
     .then(response => {
-    localStorage.setItem("token", response.headers.get("Authorization"))
-    return response.json()
-  })
-  .then(payload => {
-    console.log(payload)
-    setCurrentUser(payload)
-  })
-  .catch(error => console.log("login errors: ", error))
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      localStorage.setItem("token", response.headers.get("Authorization"))
+      return response.json();
+    })
+    .then(data => {
+      setCurrentUser(data)
+    })
+    .catch(error => {
+      console.log("error", error)
+    })
   }
 
   const signup = (userInfo) => {
@@ -60,11 +62,13 @@ const App = () => {
       method: 'POST'
     })
     .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
     localStorage.setItem("token", response.headers.get("Authorization"))
     return response.json()
   })
   .then(payload => {
-    console.log(payload)
     setCurrentUser(payload)
   })
   .catch(error => console.log("login errors: ", error))
@@ -87,7 +91,7 @@ const App = () => {
   
   
   // apartment fetches
-  function readApartments() {
+  const readApartments = () => {
     fetch(`${url}/apartments`)
       .then(response => response.json())
       .then(payload => {
