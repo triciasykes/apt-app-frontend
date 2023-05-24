@@ -24,7 +24,7 @@ const App = () => {
     readApartments()
   }, [])
 
-  const url = "http://apt-app-backend.onrender.com"
+  const url = "https://apt-app-backend.onrender.com"
   // authentication methods
   const login = (userInfo) => {
     
