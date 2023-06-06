@@ -21,6 +21,10 @@ const App = () => {
 
 
   useEffect(() => {
+    const loggedInUser = localStorage.getItem("token");
+    if (loggedInUser) {
+      setCurrentUser(loggedInUser);
+    }
     readApartments()
   }, [])
 
@@ -82,8 +86,8 @@ const App = () => {
       method: 'DELETE'
     })
     .then(payload => {
-    localStorage.removeItem("token")
-    setCurrentUser(null)
+      setCurrentUser(null)
+      localStorage.removeItem("token")
   })
   .catch(error => console.log("log out errors: ", error))
   }
